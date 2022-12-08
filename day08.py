@@ -6,14 +6,13 @@ part1 = 0
 for x in range(len(data)):
     for y in range(len(data[0])):
         cur_height = data[x][y]
-        left = data[x][:y]
-        right = data[x][y + 1 :]
-        down = [tree[y] for tree in data[x + 1 :]]
-        up = [tree[y] for tree in data[:x]]
-        for cardinal in [left, right, down, up]:
-            is_visible = 1
-            if cardinal and cur_height <= max(cardinal):
-                is_visible = 0
+        for cardinal in [
+            data[x][:y],  # left
+            data[x][y + 1 :],  # right
+            [tree[y] for tree in data[x + 1 :]],  # down
+            [tree[y] for tree in data[:x]],  # up
+        ]:
+            is_visible = 0 if cardinal and cur_height <= max(cardinal) else 1
             if is_visible == 1:
                 part1 += is_visible
                 break
@@ -22,14 +21,13 @@ part2 = 0
 for x in range(len(data)):
     for y in range(len(data[0])):
         cur_height = data[x][y]
-        left = data[x][:y]
-        right = data[x][y + 1 :]
-        down = [tree[y] for tree in data[x + 1 :]]
-        up = [tree[y] for tree in data[:x]]
-        left.reverse()
-        up.reverse()
         scores = []
-        for sightline in [left, right, down, up]:
+        for sightline in [
+            data[x][:y][::-1],  # left
+            data[x][y + 1 :],  # right
+            [tree[y] for tree in data[x + 1 :]],  # down
+            [tree[y] for tree in data[:x]][::-1],  # up
+        ]:
             score = 0
             for tree in sightline:
                 score += 1
