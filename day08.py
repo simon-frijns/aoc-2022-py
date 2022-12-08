@@ -18,8 +18,6 @@ for x in range(len(data)):
                 part1 += is_visible
                 break
 
-print(part1)
-
 part2 = 0
 for x in range(len(data)):
     for y in range(len(data[0])):
@@ -43,4 +41,5 @@ for x in range(len(data)):
             res *= s
         if res > part2:
             part2 = res
-print(part2)
+
+print(part1, part2)
