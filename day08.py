@@ -2,6 +2,7 @@ with open("day08.txt") as raw:
     data = raw.read().strip().split("\n")
     data = [[int(tree) for tree in row] for row in data]
 
+
 part1 = 0
 for x in range(len(data)):
     for y in range(len(data[0])):
@@ -23,10 +24,10 @@ for x in range(len(data)):
         cur_height = data[x][y]
         scores = []
         for sightline in [
-            data[x][:y][::-1],  # left
+            data[x][:y][::-1],  # left, mirrored
             data[x][y + 1 :],  # right
             [tree[y] for tree in data[x + 1 :]],  # down
-            [tree[y] for tree in data[:x]][::-1],  # up
+            [tree[y] for tree in data[:x]][::-1],  # up, mirrored
         ]:
             score = 0
             for tree in sightline:
